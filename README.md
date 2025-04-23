@@ -1,1 +1,0 @@
-# kheti-sutra
