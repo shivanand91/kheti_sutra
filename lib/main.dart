@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kheti_sutra/ui/splash/splash_page.dart';
+import 'package:kheti_sutra/domain/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: SplashScreen()
+      routes: AppRoutes.getRoutes(),
+      initialRoute: AppRoutes.splash_screen,
     );
   }
 }
+
