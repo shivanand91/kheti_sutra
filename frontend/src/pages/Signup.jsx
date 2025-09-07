@@ -17,8 +17,9 @@ const Signup = () => {
             if (name === '' || email === '' || password === '') {
                 return setError("All the fields required!")
             }
-            await axios.post("http://localhost:8000/api/user/signup", { name, email, password })
             console.log(name, email, password)
+            const res =await axios.post("http://localhost:8000/api/user/signup", { name, email, password })
+            console.log(res.data)
             navigate('/login')
         } catch (error) {
             console.error("Error while signing up", error);
