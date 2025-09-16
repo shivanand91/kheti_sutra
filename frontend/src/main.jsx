@@ -8,6 +8,7 @@ import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import ForgotPassword from './pages/ForgotPassword.jsx'
 import ForgotPasswordResponse from './pages/ForgotPasswordResponse.jsx'
+import LandingPage from './pages/LandingPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
+        element: <LandingPage />
+      },
+      {
+        path: "/signup",
         element: <Signup />
       },
       {
