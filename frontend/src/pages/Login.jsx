@@ -15,8 +15,8 @@ const Login = () => {
             if (email === '' || password === '') {
                 return setError("All fields required!")
             }
-            await axios.post("http://localhost:8000/api/user/login", { email, password })
-            console.log(email, password)
+            await axios.post("http://localhost:8000/api/user/login", { email, password },{ withCredentials: true })
+            // console.log(email, password)
             navigate('/home')
         } catch (error) {
             return setError("login in error")

@@ -25,9 +25,13 @@ const signUp = async (req, res) => {
          password: hashPassword,
       });
       const token = await genToken(user._id);
-      res.cookie("token", token);
+      res.cookie("token", token, {
+         httpOnly: true,
+         secure: process.env.NODE_ENV === "production",
+         sameSite: "lax",
+         maxAge: 60 * 60 * 1000
+      });
 
-      console.log(user);
       return res
          .status(200)
          .json({
@@ -58,15 +62,24 @@ const logIn = async (req, res) => {
       const isMatch = await bcryptjs.compare(password, existingUser.password);
 
       if (!isMatch) {
-         return res.status(400).json({ message: "Invalid credentials" });
+         return res.status(400).json({ message: "Invalid credentials", success:false });
       }
+
+      const token = await genToken(existingUser._id);
+      res.cookie("token", token, {
+         httpOnly: true,
+         secure: process.env.NODE_ENV === "production",
+         sameSite: "lax",
+         maxAge: 60 * 60 * 1000
+      });
+ 
       console.log("user logged in");
 
       return res
          .status(200)
-         .json({ message: "User login successfully!", user: existingUser });
+         .json({ message: "User login successfully!", user: existingUser, success: true });
    } catch (error) {
-      console.log("Error in Login");
+      console.log(error,"Error in Login");
    }
 };
 
